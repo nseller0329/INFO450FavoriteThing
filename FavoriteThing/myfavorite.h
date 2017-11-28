@@ -6,6 +6,7 @@ class myfavorite
 {
 private: 
 	int ID;
+	int i;
 	string name;
 	string console;
 	string genre;
@@ -19,6 +20,6 @@ public:
 	~myfavorite();
 
 	friend ofstream& operator<<(ofstream &fs, myfavorite *item);
-
+	friend bool operator==(myfavorite& first, myfavorite& second); 
 };
 
