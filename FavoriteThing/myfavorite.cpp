@@ -32,8 +32,6 @@ int myfavorite::getFavorite()
 {
 	cout << "What is the ID number? " << endl;
 	cin >> ID;
-	cout << "Invalid Option Please enter a valid ID number." << endl;
-	cin >> ID;
 	cin.ignore();
 	cin.clear();
 	cout << "What is the name of your favorite video game?" << endl;
@@ -45,20 +43,20 @@ int myfavorite::getFavorite()
 	cout << "Do you own it (Y/N)?" << endl;
 	getline(cin, owned);
 
-		while ((owned != "y") && (owned != "Y") && (owned != "N") && (owned != "n"))
-		{
-			cout << "Invalid Please enter a valid option." << endl;
-			getline(cin, owned);
-		}
-	
-		return 0;
+	while ((owned != "y") && (owned != "Y") && (owned != "N") && (owned != "n"))
+	{
+		cout << "Invalid Please enter a valid option." << endl;
+		getline(cin, owned);
+	}
+
+	return 0;
 }
 
 void myfavorite::displayFavorites()
 {
 	cout << "*****Your Favorite Game: " << ID << "*****" << endl;
 	cout << "Name: " << name << endl;
-	cout << "Console: "<< console << endl;
+	cout << "Console: " << console << endl;
 	cout << "Genre: " << genre << endl;
 	cout << "Owned: " << owned << endl;
 }
@@ -69,11 +67,11 @@ ofstream& operator<<(ofstream &fs, myfavorite *item)
 	return fs;
 }
 
-bool operator==(myfavorite &first, myfavorite &second)
+bool operator==(const myfavorite &a, const myfavorite &b)
 {
+	if ((a.name == b.name) && (a.ID == b.ID))
+		return -1;
 
-	if (first == second)
-	{
-		cout << "Duplicate Item." << endl;
-	}
+	else return 0;
+
 }

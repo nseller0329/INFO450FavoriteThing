@@ -4,7 +4,7 @@ using namespace std;
 
 class myfavorite
 {
-private: 
+private:
 	int ID;
 	int i;
 	string name;
@@ -20,6 +20,6 @@ public:
 	~myfavorite();
 
 	friend ofstream& operator<<(ofstream &fs, myfavorite *item);
-	friend bool operator==(myfavorite& first, myfavorite& second); 
+	friend bool operator==(const myfavorite &a, const myfavorite &b);
 };
 

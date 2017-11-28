@@ -10,11 +10,19 @@ using namespace std;
 string getFile();
 const int LISTSIZE = 50;
 
+string getFile()
+{
+	string path;
+	cout << "Please enter the file path: ";
+	getline(cin,path);
+	return path;
+
+}
+
 int main()
 {
 	myfavorite **mylist;
 	int count = 0;
-
 	int i;
 	string response = "Y";
 
@@ -23,23 +31,30 @@ int main()
 	string path = getFile();
 	ifstream infile(path);
 
+	if (!infile.good())
+	{
+	cout << "Error Couldn't Open the File." << endl;
+	getFile();
+
+	}
+
 	if (infile.good())
 	{
 		while (!infile.eof())
 		{
-			string ID,name,console,genre,owned;
-			getline(infile, ID, '|');
-		
+			string ID, name, console, genre, owned;
+			getline(infile,ID,'|');
+
 			if (ID.length())
-			{ 
-				getline(infile, name,'|');
-				getline(infile, console,'|');
-				getline(infile, genre,'|');
-				getline(infile, owned,'\n');
-				mylist[count] = new myfavorite (stoi(ID), name, console, genre, owned);
+			{
+				getline(infile, name, '|');
+				getline(infile, console, '|');
+				getline(infile, genre, '|');
+				getline(infile, owned, '\n');
+				mylist[count] = new myfavorite(stoi(ID), name, console, genre, owned);
 				count++;
 			}
-		} 
+		}
 	}
 
 	cout << "You have " << count << " records. Would you like to add any?" << endl;
@@ -48,8 +63,9 @@ int main()
 	while (response == "Y" || response == "y")
 	{
 		mylist[count] = new myfavorite();
-		if (mylist[count]->getFavorite() == 0) count++;
 		
+		if (mylist[count]->getFavorite() == 0) count++;
+
 		cout << "Would you like to add another one?" << endl;
 		cin >> response;
 	}
@@ -58,11 +74,6 @@ int main()
 	{
 		mylist[i]->displayFavorites();
 	}
-
-
-
-
-
 
 	ofstream outfile(path);
 
@@ -75,7 +86,6 @@ int main()
 	for (i = 0; i < count; i++)
 
 	{
-
 		outfile << mylist[i];
 		cout << "Successful Save." << endl;
 	}
@@ -84,17 +94,8 @@ int main()
 	{
 		delete mylist[i];
 	}
-	delete mylist[i];
-
-    return 0;
+		delete mylist[i];
+	return 0;
 }
 
-string getFile()
-{
-	string path;
-	cout << "Please enter the file path: ";
-	getline(cin, path);
-	return path;
-
-}
 
