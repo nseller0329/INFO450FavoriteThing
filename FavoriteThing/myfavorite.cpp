@@ -48,7 +48,7 @@ int myfavorite::getFavorite()
 		cout << "Invalid Please enter a valid option." << endl;
 		getline(cin, owned);
 	}
-
+	
 	return 0;
 }
 

@@ -10,20 +10,14 @@ using namespace std;
 string getFile();
 const int LISTSIZE = 50;
 
-string getFile()
-{
-	string path;
-	cout << "Please enter the file path: ";
-	getline(cin,path);
-	return path;
 
-}
 
 int main()
 {
 	myfavorite **mylist;
 	int count = 0;
-	int i;
+	int i=0;
+	bool duplicate=true;
 	string response = "Y";
 
 	mylist = new myfavorite*[LISTSIZE];
@@ -62,12 +56,22 @@ int main()
 
 	while (response == "Y" || response == "y")
 	{
-		mylist[count] = new myfavorite();
-		
-		if (mylist[count]->getFavorite() == 0) count++;
 
-		cout << "Would you like to add another one?" << endl;
-		cin >> response;
+
+		mylist[count] = new myfavorite();
+		if (mylist[count]->getFavorite() == 0) count++;
+		for (i = 0; i < count; i++)
+		{
+			if (&mylist[count] == &mylist[i])
+			{
+				cout << "Duplicate Item." << endl;
+				break;
+				//mylist[count] != new myfavorite();
+			}
+		}
+			cout << "Would you like to add another one?" << endl;
+			cin >> response;
+		
 	}
 
 	for (i = 0; i < count; i++)
@@ -86,6 +90,7 @@ int main()
 	for (i = 0; i < count; i++)
 
 	{
+		
 		outfile << mylist[i];
 		cout << "Successful Save." << endl;
 	}
@@ -93,9 +98,18 @@ int main()
 	for (i = 0; i < count; i++)
 	{
 		delete mylist[i];
+		return 0;
 	}
 		delete mylist[i];
 	return 0;
+}
+
+string getFile()
+{
+	string path;
+	cout << "Please enter the file path: ";
+	getline(cin, path);
+	return path;
 }
 
 

@@ -18,7 +18,6 @@ public:
 	myfavorite();
 	myfavorite(int i, string nm, string csl, string gr, string owd);
 	~myfavorite();
-
 	friend ofstream& operator<<(ofstream &fs, myfavorite *item);
 	friend bool operator==(const myfavorite &a, const myfavorite &b);
 };
